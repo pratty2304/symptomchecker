@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Symptom Checker</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="emergency-bar">
+    Emergency? Call <a data-emergency-number href="#"></a>
+    <span class="divider">|</span>
+    Helpline: <a data-hospital-phone href="#"></a>
+  </div>
+
+  <header class="site-header">
+    <h1>Symptom Checker</h1>
+    <p class="subtitle">For patients receiving cancer treatment at <span data-hospital-name></span></p>
+  </header>
+
+  <main>
+    <!-- Screen 1: Welcome -->
+    <section id="screen-welcome" class="screen active">
+      <div class="card">
+        <h2>How are you feeling today?</h2>
+        <p>This tool asks a few simple questions about your symptoms and tells you what to do next:</p>
+        <ul class="level-list">
+          <li><span class="chip green">Green</span> Manage at home with self-care</li>
+          <li><span class="chip amber">Amber</span> Call your care team today</li>
+          <li><span class="chip red">Red</span> Come to the hospital now</li>
+        </ul>
+        <div class="notice">
+          This tool does not replace advice from your doctor or nurse. If you are worried about how you feel,
+          always call the helpline, whatever this tool says.
+        </div>
+        <label class="agree">
+          <input type="checkbox" id="agree">
+          <span>I understand</span>
+        </label>
+        <div class="actions">
+          <button id="btn-start" class="btn primary" disabled>Start</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screen 2: Safety check -->
+    <section id="screen-safety" class="screen">
+      <div class="card">
+        <h2>First, a quick safety check</h2>
+        <p>Do you have any of these <strong>right now</strong>? Tick all that apply.</p>
+        <div id="safety-list" class="check-list"></div>
+        <div class="actions">
+          <button id="btn-safety-back" class="btn secondary">Back</button>
+          <button id="btn-safety-next" class="btn primary">None of these</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screen 3: Choose symptoms -->
+    <section id="screen-symptoms" class="screen">
+      <div class="card">
+        <h2>Which symptoms do you have?</h2>
+        <p>Choose all that apply. We will ask a few questions about each one.</p>
+        <div id="symptom-grid" class="symptom-grid"></div>
+        <div class="notice small">Temperature of 38.0°C or higher? Choose <strong>Fever, chills or signs of infection</strong>.</div>
+        <p class="hint">Can't find your symptom? Please call the helpline on <a data-hospital-phone href="#"></a>.</p>
+        <div class="actions">
+          <button id="btn-symptoms-back" class="btn secondary">Back</button>
+          <button id="btn-symptoms-next" class="btn primary" disabled>Continue</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screen 4: Questions, one symptom at a time -->
+    <section id="screen-question" class="screen">
+      <div class="card">
+        <div class="progress"><div id="progress-fill" class="progress-fill"></div></div>
+        <p id="question-count" class="question-count"></p>
+        <h2 id="question-symptom" class="question-text"></h2>
+        <div id="question-note" class="notice small"></div>
+        <div id="question-options" class="option-list"></div>
+        <div class="actions">
+          <button id="btn-question-back" class="btn secondary">Back</button>
+          <button id="btn-question-next" class="btn primary" disabled>Next</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screen 5: Result -->
+    <section id="screen-result" class="screen">
+      <div id="result-banner" class="result-banner">
+        <h2 id="result-title"></h2>
+        <p id="result-message"></p>
+        <div id="result-actions" class="result-actions"></div>
+      </div>
+
+      <div id="result-escalation" class="notice"></div>
+
+      <div id="result-details" class="card"></div>
+
+      <div class="card">
+        <h3>Summary for your care team</h3>
+        <p class="hint">Show this to the nurse or doctor when you call or arrive.</p>
+        <div class="table-wrap">
+          <table class="summary-table">
+            <thead>
+              <tr>
+                <th>Symptom</th>
+                <th>CTCAE grade</th>
+                <th>Patient-reported findings</th>
+                <th>Triage</th>
+              </tr>
+            </thead>
+            <tbody id="summary-body"></tbody>
+          </table>
+        </div>
+        <p id="summary-meta" class="hint"></p>
+      </div>
+
+      <div class="actions center no-print">
+        <button id="btn-print" class="btn secondary">Print or save</button>
+        <button id="btn-restart" class="btn primary">Start again</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    Symptom grading adapted from the NCI Common Terminology Criteria for Adverse Events (<span data-ctcae-version></span>).
+  </footer>
+
+  <script src="symptoms.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
